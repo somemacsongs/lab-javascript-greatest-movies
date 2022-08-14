@@ -2001,5 +2001,55 @@ const movies = [
     score: 8
   }
 ];
-
-
+function orderAlphabetically(moviesArray) {
+  let cloneMoviesArray = JSON.parse(JSON.stringify(moviesArray));
+  cloneMoviesArray.sort((movie1, movie2) => {
+      if (movie1.title>movie2.title) return 1;
+      if (movie1.title<movie2.title) return -1;
+      if (movie1.title===movie2.title) return 0;
+  });
+  cloneMoviesArray = cloneMoviesArray.slice(0, 20);
+  for (let i=0; i<cloneMoviesArray.length; i++){
+      cloneMoviesArray[i] = cloneMoviesArray[i].title;
+  }
+  return cloneMoviesArray;
+}
+const moviesArr = [
+  { title: 'aab' },
+  { title: 'bab' },
+  { title: 'acb' },
+  { title: 'aaa' },
+  { title: 'bbb' },
+  { title: 'anc' },
+  { title: 'kns' },
+  { title: 'zds' },
+  { title: 'pow' },
+  { title: 'gda' },
+  { title: 'res' },
+  { title: 'ter' },
+  { title: 'bca' },
+  { title: 'ccc' },
+  { title: 'bbt' },
+  { title: 'qas' },
+  { title: 'kmn' },
+  { title: 'frt' },
+  { title: 'afb' },
+  { title: 'agb' },
+  { title: 'apo' },
+  { title: 'poa' },
+  { title: 'cdf' },
+  { title: 'sea' },
+  { title: 'lom' },
+  { title: 'acs' },
+  { title: 'qas' },
+  { title: 'mns' },
+  { title: 'bvc' },
+  { title: 'gha' },
+  { title: 'lkj' },
+  { title: 'era' },
+  { title: 'ert' },
+  { title: 'tex' },
+  { title: 'zas' },
+  { title: 'pol' }
+];
+console.log(orderAlphabetically(moviesArr));
