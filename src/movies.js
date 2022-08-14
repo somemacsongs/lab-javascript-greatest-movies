@@ -28,14 +28,82 @@ function getAllDirectorWoDuplicates(moviesArray) {
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 function howManyMovies(moviesArray) {
-
+    if (moviesArray.length === 0){
+        return 0;
+    }
+    let howMany = 0;
+    const onlyDramaSpielberg = moviesArray.filter((movie) => {
+        if (movie.director === "Steven Spielberg"){
+            for (let i=0; i<movie.genre.length; i++){
+                if (movie.genre[i] === "Drama"){
+                    howMany += 1;
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+    return howMany;  
 }
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
-function scoresAverage(moviesArray) {}
+function scoresAverage(moviesArray) {
+    if (moviesArray.length == 0){
+        return 0;
+    }
+    const sumScores = moviesArray.reduce((acc, curentMovie) => {
+        if (!curentMovie.score){
+            return acc + 0;
+        }
+        return acc + curentMovie.score;
+    }, 0);
+    const average = sumScores/moviesArray.length;
+    return +(Math.round(average + "e+2")  + "e-2");  //metodo achado na internet
+}
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore(moviesArray) {}
+function dramaMoviesScore(moviesArray) {
+    if (moviesArray.length == 1){
+        return moviesArray[0].score;
+    }
+
+    /* versão usando loops:
+    let numDramaMovies = 0;
+    let sumScores = 0;
+    for (let i=0; i<moviesArray.length; i++){
+        for (let j=0; j<moviesArray[i].genre.length; j++){
+            if (moviesArray[i].genre[j] === "Drama"){
+                numDramaMovies += 1;
+                sumScores += moviesArray[i].score;
+            }
+        }
+    }
+    if (numDramaMovies === 0){
+        return 0;
+    }
+    const averageDrama = sumScores / numDramaMovies;
+    return +(Math.round(averageDrama + "e+2") + "e-2");*/
+
+    // versão usando filter e reduce
+    const onlyDrama = moviesArray.filter((currentMovie) => {
+        for (let i=0; i<currentMovie.genre.length; i++){
+            if (currentMovie.genre[i] === "Drama"){
+                return true;
+            }
+        }
+        return false;
+    });
+    if (onlyDrama.length === 0){
+        return 0;
+    }
+    const sumScoresDrama = onlyDrama.reduce((acc, currentMovie) => {
+        return acc + currentMovie.score;
+    }, 0);
+    const averageDrama = sumScoresDrama / onlyDrama.length;
+    return +(Math.round(averageDrama + "e+2") + "e-2");
+}
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {}
